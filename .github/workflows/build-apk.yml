@@ -1,0 +1,51 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:  # permite rodar manualmente pelo botão "Run workflow"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Checkout do código
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2️⃣ Instalar Node.js (necessário para Capacitor)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      # 3️⃣ Instalar dependências do projeto
+      - name: Install dependencies
+        run: npm install
+
+      # 4️⃣ Adicionar plataforma Android (se ainda não existir)
+      - name: Add Android platform
+        run: |
+          npx cap sync android
+
+      # 5️⃣ Instalar dependências Gradle/SDK
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      # 6️⃣ Compilar o APK de debug
+      - name: Build debug APK
+        working-directory: android
+        run: ./gradlew assembleDebug
+
+      # 7️⃣ Upload do artefato (.apk) para download
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: atividade-logger-debug-apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
