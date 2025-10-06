@@ -1,0 +1,6 @@
+mkdir -p .github/workflows
+nano .github/workflows/build-apk.yml
+# (cole o conteúdo acima)
+git add .github/workflows/build-apk.yml
+git commit -m "Adicionar workflow para build automático do APK"
+git push
