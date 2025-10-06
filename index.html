@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Registro de Atividades</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Registro de Atividades</h1>
+
+    <div class="controls">
+      <label>Atividade:
+        <input id="input-activity" placeholder="Descreva a atividade..." />
+      </label>
+      <label>Observações:
+        <input id="input-notes" placeholder="Observações (opcional)" />
+      </label>
+      <button id="btn-start">Iniciar Atividade</button>
+      <button id="btn-stop">Encerrar Atividade</button>
+      <button id="btn-clear">Limpar registros</button>
+    </div>
+
+    <h2>Registros</h2>
+    <table id="log-table">
+      <thead>
+        <tr>
+          <th>DATA</th>
+          <th>HORA DE INÍCIO</th>
+          <th>ATIVIDADE EXECUTADA</th>
+          <th>HORA DE ENCERRAMENTO</th>
+          <th>OBSERVAÇÕES</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <h2>Gerar Relatório</h2>
+    <div class="report-controls">
+      <label>Data inicial:
+        <input type="date" id="report-start" />
+      </label>
+      <label>Data final:
+        <input type="date" id="report-end" />
+      </label>
+      <button id="btn-generate">Gerar Relatório</button>
+      <button id="btn-export-csv">Exportar CSV</button>
+    </div>
+
+    <div id="report-area" class="report-area hidden">
+      <h3>Relatório</h3>
+      <div id="report-table-wrapper"></div>
+      <button id="btn-print">Imprimir Relatório</button>
+      <button id="btn-close-report">Fechar Relatório</button>
+    </div>
+
+    <footer>
+      <small>Aplicativo local — os dados são salvos no navegador (localStorage).</small>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
